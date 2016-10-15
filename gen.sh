@@ -57,7 +57,9 @@ perl -pi -w -e "s/__WALLTIME__/${wtime_spec}/g;"            ../SPECFEM_RUNS/${su
 
 
 cd ../SPECFEM_RUNS/${subdir}/${jname}
-./configure FC=ftn MPIFC=ftn CFLAGS="-O3" FCFLAGS="-O3"
+module swap PrgEnv-cray PrgEnv-gnu
+module swap gcc gcc/6.1.0
+./configure FC=ftn MPIFC=ftn CFLAGS="-Ofast -funroll-loops -DNDEBUG" FCFLAGS="-Ofast -funroll-loops -DNDEBUG"
 make meshfem3D -j16
 make specfem3D -j16
 qsub mesh.bolt
