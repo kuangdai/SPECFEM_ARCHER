@@ -37,6 +37,7 @@ rsync -r --force --delete ../SPECFEM/ ../SPECFEM_RUNS/${subdir}/${jname}/
 perl -pi -w -e "s/__t0__/${T0}/g;"                          ../SPECFEM_RUNS/${subdir}/${jname}/DATA/CMTSOLUTION
 perl -pi -w -e "s/__NEX__/${NEX}/g;"                        ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
 perl -pi -w -e "s/__NPROC__/${NPROC}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
+perl -pi -w -e "s/__MODEL__/${model}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
 perl -pi -w -e "s/__OCEAN__/${ocean}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
 perl -pi -w -e "s/__TOPOG__/${topog}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
 perl -pi -w -e "s/__ELLIP__/${ellip_par}/g;"                ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
