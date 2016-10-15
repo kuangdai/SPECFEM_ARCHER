@@ -1,0 +1,1 @@
+rsync -rP --exclude='.git/' ~/SPECFEM_ARCHER/ $n08path/SPECFEM_ARCHER/
