@@ -52,6 +52,8 @@ perl -pi -w -e "s/__JOBNAME__/${jname}/g;"                  ../SPECFEM_RUNS/${su
 perl -pi -w -e "s/__SUBDIR__/${subdir}/g;"                  ../SPECFEM_RUNS/${subdir}/${jname}/spec.bolt
 perl -pi -w -e "s/__WALLTIME__/${wtime_spec}/g;"            ../SPECFEM_RUNS/${subdir}/${jname}/spec.bolt
 
+perl -pi -w -e "s/__JOBNAME__/${jname}/g;"                  ../SPECFEM_RUNS/${subdir}/${jname}/clear.bolt
+perl -pi -w -e "s/__SUBDIR__/${subdir}/g;"                  ../SPECFEM_RUNS/${subdir}/${jname}/clear.bolt
 
 cd ../SPECFEM_RUNS/${subdir}/${jname}
 module swap PrgEnv-cray PrgEnv-gnu
