@@ -4,6 +4,7 @@ export model=1D_transversely_isotropic_prem
 export ocean=.false.
 export topog=.false.
 export ellip=geo
+export sediment=.false.
 
 export wtime_spec="1:0:0"
 export wtime_mesh="0:03:0"
@@ -39,6 +40,7 @@ perl -pi -w -e "s/__OCEAN__/${ocean}/g;"                    ../SPECFEM_RUNS/${su
 perl -pi -w -e "s/__TOPOG__/${topog}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
 perl -pi -w -e "s/__ELLIP__/${ellip_par}/g;"                ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
 perl -pi -w -e "s/__PERFECT_SPHERE__/${perfect_sphere}/g;"  ../SPECFEM_RUNS/${subdir}/${jname}/setup/constants.h.in
+perl -pi -w -e "s/__DO_SEDIMENT__/${sediment}/g;"           ../SPECFEM_RUNS/${subdir}/${jname}/setup/constants.h.in
 
 perl -pi -w -e "s/__NPROC__/${nproc}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/mesh.bolt
 perl -pi -w -e "s/__NNODE__/${nnode}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/mesh.bolt
