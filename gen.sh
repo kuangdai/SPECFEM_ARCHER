@@ -1,15 +1,19 @@
 export NEX=448
 export NPROC=28
-export model=1D_transversely_isotropic_prem
-export ocean=.false.
-export topog=.false.
+export model=s40rts
+export ocean=.true.
+export topog=.true.
 export ellip=geo
-export sediment=.false.
+export sediment=.true.
 
 export wtime_spec="1:0:0"
 export wtime_mesh="0:03:0"
-export subdir="ellip"
-export jname=pr2_10_geo
+export subdir="xinjiang"
+export jname=gcmt_10
+
+# source
+export cmt=CMTSOLUTION_XJCh_GCMT
+export station=STATIONS_XJCh
 
 ######################################
 export nproc=$((${NPROC}*${NPROC}*6))
@@ -32,6 +36,9 @@ fi
 mkdir ../SPECFEM_RUNS/${subdir}
 mkdir ../SPECFEM_RUNS/${subdir}/${jname}
 rsync -r --force --delete ../SPECFEM/ ../SPECFEM_RUNS/${subdir}/${jname}/
+
+cp ../SPECFEM_RUNS/${subdir}/${jname}/DATA/${cmt} ../SPECFEM_RUNS/${subdir}/${jname}/DATA/CMTSOLUTION
+cp ../SPECFEM_RUNS/${subdir}/${jname}/DATA/${station} ../SPECFEM_RUNS/${subdir}/${jname}/DATA/STATIONS
 
 perl -pi -w -e "s/__NEX__/${NEX}/g;"                        ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
 perl -pi -w -e "s/__NPROC__/${NPROC}/g;"                    ../SPECFEM_RUNS/${subdir}/${jname}/DATA/Par_file
@@ -60,7 +67,7 @@ perl -pi -w -e "s/__SUBDIR__/${subdir}/g;"                  ../SPECFEM_RUNS/${su
 cd ../SPECFEM_RUNS/${subdir}/${jname}
 module swap PrgEnv-cray PrgEnv-gnu
 module swap gcc gcc/6.1.0
-./configure FC=ftn MPIFC=ftn CFLAGS="-Ofast -funroll-loops -DNDEBUG" FCFLAGS="-Ofast -funroll-loops -DNDEBUG"
+./configure FC=ftn MPIFC=ftn CFLAGS="-Ofast -funroll-loops -DNDEBUG" FCFLAGS="-Ofast -funroll-loops -DNDEBUG" FLAGS_CHECK="-DFORCE_VECTORIZATION"
 make meshfem3D -j16
 make specfem3D -j16
 qsub mesh.bolt
